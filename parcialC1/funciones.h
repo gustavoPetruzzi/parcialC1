@@ -2,6 +2,7 @@ typedef struct{
     int idComentario;
     char texto[50];
     int meGusta;
+    int isEmpty;
 }eComentario;
 typedef struct{
     char nombre[30];
@@ -19,4 +20,11 @@ int getString(char* input,char message[],char eMessage[], int lowLimit, int hiLi
 int getName(char* input,char message[],char eMessage[], int lowLimit, int hiLimit);
 void pedirDatos(eUsuarios lista[], int length, char* nombre,char* nick, char* claveAcceso,char* email, int pedirNick);
 int buscarPorNick(eUsuarios lista[], int length, char nick[]);
-void agregarProducto(eUsuarios lista[],int length, int indice);
+eUsuarios cargarUsuario(char nombre[], char nick[], char claveAcceso[], char email[]);
+void agregarUsuario(eUsuarios lista[],int length, int indice);
+int isEmpty(eUsuarios lista[], int length);
+void modificar(eUsuarios lista[],int length);
+void borrar(eUsuarios lista[], int length);
+int buscarPorClaveAcceso(eUsuarios lista[], int length, char claveAcceso[]);
+int ingresar(eUsuarios lista[], int length, char* nick);
+int UltimoComentario(eUsuarios lista[], int length);

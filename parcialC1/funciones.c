@@ -17,12 +17,16 @@
 int initArray(eUsuarios* pUsuario, int length)
 {
     int retorno = -1;
-    int i;
+    int i,j;
     if(pUsuario != NULL && length> 0)
     {
         for(i=0;i<length;i++)
         {
             pUsuario[i].isEmpty = 1;
+            for(j= 0; i<50; j++)
+            {
+                pUsuario[i].misComentarios[j].isEmpty = 1;
+            }
         }
         retorno = 0;
     }
@@ -200,7 +204,7 @@ void pedirDatos(eUsuarios lista[], int length, char* nombre,char* nick, char* cl
             }
             else
             {
-                printf("Ya existe alguien con ese nick!");
+                printf("Ya existe alguien con ese nick!\n");
                 auxInt = -1;
             }
 
@@ -226,7 +230,7 @@ void pedirDatos(eUsuarios lista[], int length, char* nombre,char* nick, char* cl
 }
 
 
-eUsuarios cargarProducto(char nombre[], char nick[], char claveAcceso[], char email[])
+eUsuarios cargarUsuario(char nombre[], char nick[], char claveAcceso[], char email[])
 {
     eUsuarios auxUsuario;
 
@@ -239,7 +243,7 @@ eUsuarios cargarProducto(char nombre[], char nick[], char claveAcceso[], char em
     return auxUsuario;
 }
 
-void agregarProducto(eUsuarios lista[],int length, int indice)
+void agregarUsuario(eUsuarios lista[],int length, int indice)
 {
 
     char nombre[30];
@@ -249,11 +253,163 @@ void agregarProducto(eUsuarios lista[],int length, int indice)
     if(indice != -1)
         {
             pedirDatos(lista, length, nombre, nick, claveAcceso, email, 1);
-            lista[indice] = cargarProducto(nombre, nick,claveAcceso,email);
+            lista[indice] = cargarUsuario(nombre, nick,claveAcceso,email);
             printf("Usuario Cargado!");
         }
         else
         {
             printf("No hay mas lugar\n");
         }
+}
+
+
+/** \brief Indica si existe algun producto cargado
+ *
+ * \param puntero lista[] lugar donde va a iterar la funcion
+ * \param int length tamaño maximo del array de estructura
+ * \return devuelve [1] si el array no tiene ningun producto cargado o
+ *         [0] si esta cargado con aunque sea un producto
+ */
+int isEmpty(eUsuarios lista[], int length)
+{
+    int i;
+    int retorno = 1;
+    for(i= 0; i<length; i++)
+    {
+        if(lista[i].isEmpty == 0)
+        {
+            retorno = 0;
+            break;
+        }
+    }
+    return retorno;
+}
+
+
+void modificar(eUsuarios lista[],int length)
+{
+    char nombre[30];
+    char nick[30];
+    char claveAcceso[30];
+    char email[30];
+    int indice;
+    int auxInt;
+    auxInt = getString(nick, "Ingrese su nick: ", "ERROR: solo se permite 30 caracteres", 1, 30);
+    if(auxInt == 0)
+    {
+        indice = buscarPorNick(lista, length, nick);
+        if(indice!= -1)
+        {
+                pedirDatos(lista, length, nombre, nick,claveAcceso,email, 0);
+                lista[indice] = cargarUsuario(nombre,nick,claveAcceso, email);
+                printf("Usuario modificado!\n");
+        }
+        else
+        {
+            printf("No existe ningun usuario con ese nick!\n");
+        }
+    }
+}
+
+
+void borrar(eUsuarios lista[], int length)
+{
+    char auxNick[30];
+    int auxInt;
+    int indice;
+    auxInt = getString(auxNick, "Ingrese el nick del usuario a borrar: ", "ERROR: Maximo 30 caracteres\n", 1, 30);
+    if(auxInt== 0)
+    {
+        indice = buscarPorNick(lista, length, auxNick);
+        if(indice != -1)
+        {
+            lista[indice].isEmpty = 1;
+        }
+        else
+        {
+            printf("No existe ningun producto con ese codigo\n!");
+        }
+    }
+}
+
+int buscarPorClaveAcceso(eUsuarios lista[], int length, char claveAcceso[])
+{
+    int i;
+    int index = -1;
+    for(i=0;i<length; i++)
+    {
+        if((strcmp(lista[i].claveAcceso, claveAcceso) == 0))
+        {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+
+int ingresar(eUsuarios lista[], int length, char* nick)
+{
+    int auxInt;
+    char auxNick[30];
+    char auxClaveAcceso[30];
+    int indiceNick, indiceClave;
+    int cantidadVeces= 3;
+
+
+
+
+    do
+    {
+        do
+        {
+            auxInt= getString(auxNick, "Ingrese su nick: ", "ERROR: maximo 30 caracteres", 1, 30);
+        }while(auxInt!= 0);
+        strcpy(nick, auxNick);
+
+        do
+        {
+            auxInt = getString(auxClaveAcceso, "Ingrese su clave: ", "ERROR: maximo 30 caracteres", 1, 30);
+        }while(auxInt != 0);
+
+        indiceNick =buscarPorNick(lista, length, auxNick);
+        indiceClave = buscarPorClaveAcceso(lista, length, auxClaveAcceso);
+        if(indiceNick == -1 || indiceClave == -1)
+        {
+            printf("Nick/clave incorrecto!");
+            cantidadVeces = cantidadVeces -1;
+        }
+    }while(indiceNick == -1 && indiceClave == -1 && cantidadVeces != 0);
+
+    if(cantidadVeces == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+int UltimoComentario(eUsuarios lista[], int length)
+{
+    int i, j;
+    int idUltimoComentario = 0;
+    for(i = 0; i< length; i++)
+    {
+        if(lista[i].isEmpty == 0)
+        {
+            for(j = 0; j<50; j++)
+            {
+                if(lista[i].misComentarios[j].isEmpty == 0)
+                {
+                    if(lista[i].misComentarios[j].idComentario > idUltimoComentario)
+                    {
+                        idUltimoComentario = lista[i].misComentarios[j].idComentario;
+                    }
+                }
+            }
+        }
+    }
+    return idUltimoComentario;
 }

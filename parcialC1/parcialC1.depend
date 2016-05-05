@@ -13,3 +13,17 @@
 	<stdlib.h>
 	"funciones.h"
 
+1462479191 source:c:\documents and settings\carmen\escritorio\c\parcialc1-master\parcialc1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1462481699 c:\documents and settings\carmen\escritorio\c\parcialc1-master\parcialc1\funciones.h
+
+1462479083 source:c:\documents and settings\carmen\escritorio\c\parcialc1-master\parcialc1\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"funciones.h"
+
