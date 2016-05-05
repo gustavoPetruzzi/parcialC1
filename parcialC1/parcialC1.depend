@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1462423689 source:c:\users\chusti\documents\github\parcialc1\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"funciones.h"
+
+1462423580 c:\users\chusti\documents\github\parcialc1\funciones.h
+
+1462423587 source:c:\users\chusti\documents\github\parcialc1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
