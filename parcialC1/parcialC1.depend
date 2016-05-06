@@ -1,26 +1,13 @@
 # depslib dependency file v1.0
-1462423689 source:c:\users\chusti\documents\github\parcialc1\funciones.c
+1462515743 source:c:\users\gustavo\desktop\ejerciciosc\parcialc1\main.c
 	<stdio.h>
 	<stdlib.h>
-	<ctype.h>
+	"funciones.h"
 	<string.h>
-	"funciones.h"
 
-1462423580 c:\users\chusti\documents\github\parcialc1\funciones.h
+1462516340 c:\users\gustavo\desktop\ejerciciosc\parcialc1\funciones.h
 
-1462423587 source:c:\users\chusti\documents\github\parcialc1\main.c
-	<stdio.h>
-	<stdlib.h>
-	"funciones.h"
-
-1462479191 source:c:\documents and settings\carmen\escritorio\c\parcialc1-master\parcialc1\main.c
-	<stdio.h>
-	<stdlib.h>
-	"funciones.h"
-
-1462481699 c:\documents and settings\carmen\escritorio\c\parcialc1-master\parcialc1\funciones.h
-
-1462479083 source:c:\documents and settings\carmen\escritorio\c\parcialc1-master\parcialc1\funciones.c
+1462515232 source:c:\users\gustavo\desktop\ejerciciosc\parcialc1\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
